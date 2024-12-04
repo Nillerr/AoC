@@ -28,6 +28,7 @@ fun String.toCharMatrix(): CharMatrix {
 
     return matrix
 }
+
 fun CharMatrix(width: Int, height: Int, value: Char): StorageCharMatrix {
     val matrix = StorageCharMatrix(width, height)
     matrix.fill(value)

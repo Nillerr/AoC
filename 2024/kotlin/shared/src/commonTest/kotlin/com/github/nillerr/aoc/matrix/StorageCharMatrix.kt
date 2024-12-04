@@ -1,5 +1,7 @@
 package com.github.nillerr.aoc.matrix
 
+import kotlin.math.max
+
 class StorageCharMatrix(override val width: Int, override val height: Int) : CharMatrix {
     val storage = CharArray(height * width)
 
@@ -43,6 +45,48 @@ class StorageCharMatrix(override val width: Int, override val height: Int) : Cha
             storage[i] = value
         }
     }
+
+    fun normalized(char: Char): CharMatrix {
+        val size = max(width, height)
+
+        val matrix = CharMatrix(size, size, char)
+        matrix.set(0, 0, this)
+        return matrix
+    }
+
+    fun transposed(char: Char): CharMatrix {
+        val normal = normalized(char)
+
+        val matrix = CharMatrix(normal.width, normal.height, char)
+        for (y in 0..<normal.height) {
+            for (x in 0..<normal.width) {
+                if (y != x) {
+                    matrix.set(y, x, normal.get(x, y))
+                    matrix.set(x, y, normal.get(y, x))
+                }
+            }
+        }
+
+        return matrix
+    }
+
+//    fun rotated(char: Char): CharMatrix {
+//        val transposed = transposed(char)
+//
+//        val matrix = CharMatrix(transposed.width, transposed.height, char)
+//
+//        for (y in 0..<transposed.height) {
+//            for (x in 0..<transposed.width) {
+//                if (y != x) {
+//                    matrix.set(y, x, transposed.get(y, ))
+//                    val c = transposed.get(x, y)
+//                    val rx = x
+//                }
+//            }
+//        }
+//
+//        return matrix
+//    }
 
     override fun toString(): String {
         return buildString {
