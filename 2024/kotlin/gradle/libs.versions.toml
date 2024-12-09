@@ -4,10 +4,12 @@ android-compileSdk = "34"
 android-minSdk = "24"
 junit = "4.13.2"
 kotlin = "2.0.21"
+kotlinx-coroutines = "1.9.0"
 moko-resources = "0.24.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
