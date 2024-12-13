@@ -61,6 +61,18 @@ class CharGrid(val width: Int, val height: Int, val storage: CharArray) {
         }
     }
 
+    inline fun <K : Any, V> groupByNotNull(operation: (Int, Int, Char) -> K?, transform: (Int, Int, Char) -> V): Map<K, List<V>> {
+        return buildMap<K, MutableList<V>> {
+            forEach { x, y, c ->
+                val key = operation(x, y, c)
+                if (key != null) {
+                    val value = transform(x, y, c)
+                    getOrPut(key) { mutableListOf() }.add(value)
+                }
+            }
+        }
+    }
+
     fun locations(char: Char): List<Vector2> {
         return buildList {
             forEach { x, y, c ->
@@ -87,7 +99,7 @@ class CharGrid(val width: Int, val height: Int, val storage: CharArray) {
                 for (x in 0 until width) {
                     val c = get(x, y)
                     if (c == '.') {
-                        append(' ')
+                        append('·')
                     } else {
                         append(c)
                     }
