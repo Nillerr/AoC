@@ -32,6 +32,10 @@ enum class Direction(val vector: Vector2, val char: Char) {
 data class Vector2(val x: Int, val y: Int) {
     fun applyX(x: Int) = x + this.x
     fun applyY(y: Int) = y + this.y
+
+    override fun toString(): String {
+        return "($x, $y)"
+    }
 }
 
 class CharGrid(val width: Int, val height: Int, val storage: CharArray) {
@@ -47,6 +51,14 @@ class CharGrid(val width: Int, val height: Int, val storage: CharArray) {
 
     operator fun set(x: Int, y: Int, char: Char) {
         storage[index(x, y)] = char
+    }
+
+    fun fill(char: Char) {
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                set(x, y, char)
+            }
+        }
     }
 
     fun copy(): CharGrid {
